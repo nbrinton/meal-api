@@ -6,7 +6,7 @@ namespace MEalAPI.Models
 {
     [Comment("Table representing steps within a recipe's directions.")]
     [Table("recipe_steps", Schema = "MEal")]
-    public class RecipeStep
+    public class RecipeStep : BaseEntity
     {
         [Key]
         public int Id { get; set; }

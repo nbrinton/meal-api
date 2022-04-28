@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MEalAPI.Models
 {
     [Table("ingredients", Schema = "MEal")]
-    public class Ingredient
+    public class Ingredient : BaseEntity
     {
         [Key]
         public int Id { get; set; }

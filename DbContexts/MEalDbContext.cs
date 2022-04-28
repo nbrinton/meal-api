@@ -22,30 +22,39 @@ namespace MEalAPI.DbContexts
         public DbSet<Section> Sections { get; set; } = null!;
 
 
-        //public override int SaveChanges()
-        //{
-        //    var entries = ChangeTracker
-        //        .Entries()
-        //        .Where(e => e.Entity is BaseEntity && (
-        //                e.State == EntityState.Added
-        //                || e.State == EntityState.Modified));
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is ICreatedUpdated && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
 
-        //    foreach (var entityEntry in entries)
-        //    {
-        //        ((BaseEntity)entityEntry.Entity).Updated = DateTime.Now;
+            var now = DateTimeOffset.Now;
 
-        //        if (entityEntry.State == EntityState.Added)
-        //        {
-        //            ((BaseEntity)entityEntry.Entity).Created = DateTime.Now;
-        //        }
-        //    }
+            foreach (var entry in entries)
+            {
+                var entity = (ICreatedUpdated)entry.Entity;
 
-        //    return base.SaveChanges();
-        //}
+                if (entry.State == EntityState.Added)
+                {
+                    entity.Updated = now;
+                    entity.Created = now;
+                }
+                
+                if (entry.State == EntityState.Modified)
+                {
+                    entity.Updated = now;
+
+                }
+            }
+
+            return base.SaveChanges();
+        }
 
         //protected override void onModelCreating(ModelBuilder modelbuilder)
         //{
-           
+
         //}
 
     }

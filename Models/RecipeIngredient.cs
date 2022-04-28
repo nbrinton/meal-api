@@ -6,7 +6,7 @@ namespace MEalAPI.Models
 {
     [Comment("Table tracking ingredients as used in a specific recipe, including the quantity, units of measurement, and if the ingredient is a 'staple' (should be excluded from generated grocery list")]
     [Table("recipe_ingredients", Schema = "MEal")]
-    public class RecipeIngredient
+    public class RecipeIngredient : BaseEntity
     {
         [Key]
         public int Id { get; set; }

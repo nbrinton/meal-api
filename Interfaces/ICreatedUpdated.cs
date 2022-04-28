@@ -1,7 +1,8 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
 namespace MEalAPI.Models
 {
-    public abstract class BaseEntity : ICreatedUpdated
+    public interface ICreatedUpdated
     {
         public DateTimeOffset Created { get; set; }
 

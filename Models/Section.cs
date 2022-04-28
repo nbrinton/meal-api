@@ -6,7 +6,7 @@ namespace MEalAPI.Models
 {
     [Comment("Table representing grocery store sections such as Dairy, Bulk, Produce, etc.")]
     [Table("sections", Schema = "MEal")]
-    public class Section
+    public class Section : BaseEntity
     {
         [Key]
         public int Id { get; set; }
