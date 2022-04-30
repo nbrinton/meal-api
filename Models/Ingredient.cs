@@ -14,8 +14,10 @@ namespace MEalAPI.Models
 
         // Foreign Key Relations
         [Required]
+        [System.Text.Json.Serialization.JsonIgnore]
         public Section Section { get; set; } = null!;
 
+        [System.Text.Json.Serialization.JsonIgnore]
         public List<RecipeIngredient>? RecipeIngredients { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace MEalAPI.Models
         public Ingredient Ingredient { get; set; } = null!;
 
         [Required]
+        [System.Text.Json.Serialization.JsonIgnore]
         public Recipe Recipe { get; set; } = null!;
     }
 }

@@ -26,21 +26,30 @@ namespace MEalAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
-            return await _context.Recipes.ToListAsync();
+            return await _context.Recipes
+                //.AsSplitQuery()
+                .Include(r => r.RecipeIngredients)
+                .ThenInclude(ri => ri.Ingredient)
+                .Include(r => r.RecipeSteps)
+                .ToListAsync();
         }
 
         // GET: api/Recipes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Recipe>> GetRecipe(int id)
         {
-            var recipe = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes
+                .Include(r => r.RecipeIngredients)
+                .ThenInclude(ri => ri.Ingredient)
+                .Include(r => r.RecipeSteps)
+                .FirstOrDefaultAsync(r => r.Id == id);
 
             if (recipe == null)
             {
                 return NotFound();
             }
 
-            return recipe;
+            return Ok(recipe);
         }
 
         // PUT: api/Recipes/5
