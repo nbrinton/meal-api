@@ -12,10 +12,9 @@ namespace MEalAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public string Content { get; set; } = null!;
+        public int Order { get; set; }
 
-        // Foreign Key Relations
         [Required]
-        public Recipe Recipe { get; set; } = null!;
+        public string Content { get; set; } = null!;
     }
 }

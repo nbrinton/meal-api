@@ -17,6 +17,9 @@ namespace MEalAPI.Models
         public int? CookTime { get; set; }
 
         // Foreign Key Relations
+        [Required]
+        public Meal Meal { get; set; } = null!;
+
         public List<RecipeIngredient>? RecipeIngredients { get; set; }
 
         public List<RecipeStep>? RecipeSteps { get; set; }

@@ -52,10 +52,30 @@ namespace MEalAPI.DbContexts
             return base.SaveChanges();
         }
 
-        //protected override void onModelCreating(ModelBuilder modelbuilder)
-        //{
+        protected override void OnModelCreating(ModelBuilder mb)
+        {
+            // Documentation reference:
+            // https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#single-navigation-property-1
+            mb.Entity<Recipe>()
+                .HasMany(r => r.RecipeIngredients)
+                .WithOne();
 
-        //}
+            mb.Entity<Recipe>()
+                .HasMany(r => r.RecipeSteps)
+                .WithOne();
+
+            mb.Entity<Recipe>()
+                .HasOne(r => r.Meal)
+                .WithMany();
+
+            mb.Entity<RecipeIngredient>()
+                .HasOne(ri => ri.Ingredient)
+                .WithMany();
+
+            mb.Entity<Ingredient>()
+                .HasOne(i => i.Section)
+                .WithMany();            
+        }
 
     }
 }

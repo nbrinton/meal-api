@@ -22,9 +22,5 @@ namespace MEalAPI.Models
         // Foreign Key Relations
         [Required]
         public Ingredient Ingredient { get; set; } = null!;
-
-        [Required]
-        [System.Text.Json.Serialization.JsonIgnore]
-        public Recipe Recipe { get; set; } = null!;
     }
 }

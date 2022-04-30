@@ -27,10 +27,11 @@ namespace MEalAPI.Controllers
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
             return await _context.Recipes
-                //.AsSplitQuery()
                 .Include(r => r.RecipeIngredients)
                 .ThenInclude(ri => ri.Ingredient)
+                .ThenInclude(i => i.Section)
                 .Include(r => r.RecipeSteps)
+                .Include(r => r.Meal)
                 .ToListAsync();
         }
 
@@ -41,7 +42,9 @@ namespace MEalAPI.Controllers
             var recipe = await _context.Recipes
                 .Include(r => r.RecipeIngredients)
                 .ThenInclude(ri => ri.Ingredient)
+                .ThenInclude(i => i.Section)
                 .Include(r => r.RecipeSteps)
+                .Include(r => r.Meal)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (recipe == null)

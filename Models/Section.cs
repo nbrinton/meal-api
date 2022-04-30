@@ -13,8 +13,5 @@ namespace MEalAPI.Models
 
         [Required]
         public string Name { get; set; } = null!;
-
-        // Foreign Key Relations
-        public List<Ingredient>? Ingredients { get; set; }
     }
 }
