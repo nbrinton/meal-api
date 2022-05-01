@@ -21,6 +21,8 @@ namespace MEalAPI.DbContexts
 
         public DbSet<Section> Sections { get; set; } = null!;
 
+        public DbSet<Meal> Meals { get; set; } = null!;
+
 
         public override int SaveChanges()
         {
