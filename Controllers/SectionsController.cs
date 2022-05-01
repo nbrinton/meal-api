@@ -31,7 +31,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/Sections/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Section>> GetSection(int id)
+        public async Task<ActionResult<Section>> GetSection(long id)
         {
             var section = await _context.Sections.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Sections/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSection(int id, Section section)
+        public async Task<IActionResult> PutSection(long id, Section section)
         {
             if (id != section.Id)
             {
@@ -87,7 +87,7 @@ namespace MEalAPI.Controllers
 
         // DELETE: api/Sections/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSection(int id)
+        public async Task<IActionResult> DeleteSection(long id)
         {
             var section = await _context.Sections.FindAsync(id);
             if (section == null)
@@ -101,7 +101,7 @@ namespace MEalAPI.Controllers
             return NoContent();
         }
 
-        private bool SectionExists(int id)
+        private bool SectionExists(long id)
         {
             return _context.Sections.Any(e => e.Id == id);
         }

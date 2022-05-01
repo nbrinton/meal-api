@@ -31,7 +31,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/RecipeSteps/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RecipeStep>> GetRecipeStep(int id)
+        public async Task<ActionResult<RecipeStep>> GetRecipeStep(long id)
         {
             var recipeStep = await _context.RecipeSteps.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace MEalAPI.Controllers
         // PUT: api/RecipeSteps/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeStep(int id, RecipeStep recipeStep)
+        public async Task<IActionResult> PutRecipeStep(long id, RecipeStep recipeStep)
         {
             if (id != recipeStep.Id)
             {
@@ -87,7 +87,7 @@ namespace MEalAPI.Controllers
 
         // DELETE: api/RecipeSteps/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecipeStep(int id)
+        public async Task<IActionResult> DeleteRecipeStep(long id)
         {
             var recipeStep = await _context.RecipeSteps.FindAsync(id);
             if (recipeStep == null)
@@ -101,7 +101,7 @@ namespace MEalAPI.Controllers
             return NoContent();
         }
 
-        private bool RecipeStepExists(int id)
+        private bool RecipeStepExists(long id)
         {
             return _context.RecipeSteps.Any(e => e.Id == id);
         }
