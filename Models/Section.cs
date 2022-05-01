@@ -9,7 +9,7 @@ namespace MEalAPI.Models
     public class Section : BaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; } = null!;

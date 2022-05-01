@@ -9,13 +9,13 @@ namespace MEalAPI.Models
     public class RecipeIngredient : BaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Units { get; set; } = null!;
 
         [Required]
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
 
         public bool IsStaple { get; set; }
 

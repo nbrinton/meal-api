@@ -9,7 +9,7 @@ namespace MEalAPI.Models
     public class RecipeStep : BaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public int Order { get; set; }
