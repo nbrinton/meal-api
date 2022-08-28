@@ -1,15 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
+using MEalAPI.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = "Host=localhost; Port=5432; Database=MEal; Username=postgres; Password=postgres";
 
 // Add services to the container.
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<MEalDbContext>(options =>
 {
-    options.UseNpgsql("Host=localhost; Port=5432; Database=MEal; Username=postgres; Password=postgres");
+    options.UseNpgsql(connectionString);
 });
+
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MEalDbContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
