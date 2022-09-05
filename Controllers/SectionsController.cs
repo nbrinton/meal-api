@@ -82,7 +82,7 @@ namespace MEalAPI.Controllers
             _context.Sections.Add(section);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSection", new { id = section.Id }, section);
+            return CreatedAtAction(nameof(GetSection), new { id = section.Id }, section);
         }
 
         // DELETE: api/Sections/5

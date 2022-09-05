@@ -79,7 +79,7 @@ namespace MEalAPI.DbContexts
 
             mb.Entity<Ingredient>()
                 .HasOne(i => i.Section)
-                .WithMany();            
+                .WithMany();
         }
 
     }

@@ -23,4 +23,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\natha\repos\MEalAPI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\natha\repos\MEalAPI\.editorconfig" />
+  </ItemGroup>
+
 </Project>

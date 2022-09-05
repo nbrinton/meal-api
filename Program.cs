@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = "Host=localhost; Port=5432; Database=MEal; Username=postgres; Password=postgres";
-
-// Add services to the container.
-builder.Services.AddControllers();
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MEalDbContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
 
+// Add services to the container.
+builder.Services.AddControllers();
+
+// Add the user model class to use with Microsoft Identity
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MEalDbContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

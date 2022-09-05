@@ -86,7 +86,7 @@ namespace MEalAPI.Controllers
             _context.Ingredients.Add(ingredient);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIngredient", new { id = ingredient.Id }, ingredient);
+            return CreatedAtAction(nameof(GetIngredient), new { id = ingredient.Id }, ingredient);
         }
 
         // DELETE: api/Ingredients/5

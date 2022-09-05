@@ -82,7 +82,7 @@ namespace MEalAPI.Controllers
             _context.RecipeSteps.Add(recipeStep);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRecipeStep", new { id = recipeStep.Id }, recipeStep);
+            return CreatedAtAction(nameof(GetRecipeStep), new { id = recipeStep.Id }, recipeStep);
         }
 
         // DELETE: api/RecipeSteps/5
