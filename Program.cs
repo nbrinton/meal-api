@@ -11,6 +11,8 @@ builder.Services.AddDbContext<MEalDbContext>(options =>
     options.UseNpgsql(connectionString);
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 // Add services to the container.
 builder.Services.AddControllers();
 
