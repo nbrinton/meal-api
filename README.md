@@ -93,15 +93,19 @@ on external SSDs or what happened, but yeah...
 - [Resource record types | Google Domains](https://support.google.com/domains/answer/10751068#zippy=,cname)
 - [Static vs. dynamic IP addresses | Google Domains](https://support.google.com/fiber/answer/3547208?hl=en)
 - [Configure DNS for your network | Google Domains](https://support.google.com/fiber/answer/4647563)
-- [Learn about Dynamic DNS | Google Domains](https://support.google.com/domains/answer/6147083?hl=en#zippy=,set-up-a-client-program-on-your-gateway-host-or-server)
 - [How changes propagate to Google services | Google Domains](https://support.google.com/a/answer/7514107?hl=en#:~:text=The%20time%20it%20takes%20depends,your%20domain%20host%20for%20details.)
 - [Connect your website to a domain registered through Google | Google Domains](https://support.google.com/a/answer/7538152?hl=en#zippy=,my-domain-registrar-is-google-domains,for-an-a-record,for-a-cname-record,for-a-name-server-ns-record)
+- [Learn about Dynamic DNS | Google Domains](https://support.google.com/domains/answer/6147083?hl=en#zippy=,set-up-a-client-program-on-your-gateway-host-or-server)
+- [ddclient | Ubuntu](https://help.ubuntu.com/community/DynamicDNS)
+- [How to set up a wildcard subdomain on Google Domains](https://blog.andersonbanihirwe.dev/posts/2021/google-dynamic-dns-wildcard-subdomains/)
 
-After following the above tutorials I was still having issues accessing the
-either sub-domain (or the main domain) outside of our wifi. Ethan came over for
-help with a work issue and took a look at my DNS and router configuration while
-he was here. I had mostly set things up correctly, but was missing one thing and
-slightly off on another.
+After following the above tutorials I created two 'A' entries that pointed
+(erroneously) to my server's internal IP address: one for nbrinton.dev and one
+for *.nbrinton.dev. I was still having issues accessing either sub-domain (or
+the main domain) outside of our wifi. Ethan came over for help with a work issue
+and took a look at my DNS and router configuration while he was here. I had
+mostly set things up correctly, but was missing one thing and slightly off on
+another.
 
 Make sure to use the public-facing WAN IP-address. You can find this by going
 to your router's default gateway IP (find by running `ifconfig` (or `ipconfig`)
@@ -122,6 +126,12 @@ actually have IPv6 and only has IPv4. So I went ahead and deleted those entries.
 Ethan used [nslookup](https://www.nslookup.io), [ipmonkey](http://ipmonkey.com)
 and [canyouseeme](https://canyouseeme.org) to see if my domain was properly
 mapping to my WAN IP-address and if it was accessible publicly.
+
+The other problem with the two 'A' records that I set up was that they were
+configured with the assumption that my IP address was static when in fact it is
+dynamic. I followed the bottom three pages listed above in order to set up
+dynamic DNS so that the IP address in the 'A' records is automatically updated
+whenever it changes.
 
 ### Set Up Virtual Hosts in Apache
 In order to easily run multiple websites on a single server using Apache, you
