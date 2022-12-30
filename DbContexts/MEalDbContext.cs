@@ -1,28 +1,29 @@
-﻿using MEalAPI.Models;
+﻿using MEalAPI.Entities;
+using MEalAPI.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MEalAPI.DbContexts
 {
-    public class MEalDbContext : IdentityDbContext<User>
+    public class MealDbContext : IdentityDbContext<EUser>
     {
-        public MEalDbContext(DbContextOptions<MEalDbContext> options)
+        public MealDbContext(DbContextOptions<MealDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Recipe> Recipes { get; set; } = null!;
+        public DbSet<ERecipe> Recipes { get; set; } = null!;
 
-        public DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
+        public DbSet<ERecipeIngredient> RecipeIngredients { get; set; } = null!;
 
-        public DbSet<RecipeStep> RecipeSteps { get; set; } = null!;
+        public DbSet<ERecipeStep> RecipeSteps { get; set; } = null!;
 
-        public DbSet<Ingredient> Ingredients { get; set; } = null!;
+        public DbSet<EIngredient> Ingredients { get; set; } = null!;
 
-        public DbSet<Section> Sections { get; set; } = null!;
+        public DbSet<ESection> Sections { get; set; } = null!;
 
-        public DbSet<Meal> Meals { get; set; } = null!;
+        public DbSet<EMeal> Meals { get; set; } = null!;
 
 
         public override int SaveChanges()
@@ -61,23 +62,24 @@ namespace MEalAPI.DbContexts
 
             // Documentation reference:
             // https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#single-navigation-property-1
-            mb.Entity<Recipe>()
+
+            mb.Entity<ERecipe>()
                 .HasMany(r => r.RecipeIngredients)
                 .WithOne();
 
-            mb.Entity<Recipe>()
+            mb.Entity<ERecipe>()
                 .HasMany(r => r.RecipeSteps)
                 .WithOne();
 
-            mb.Entity<Recipe>()
+            mb.Entity<ERecipe>()
                 .HasOne(r => r.Meal)
                 .WithMany();
 
-            mb.Entity<RecipeIngredient>()
+            mb.Entity<ERecipeIngredient>()
                 .HasOne(ri => ri.Ingredient)
                 .WithMany();
 
-            mb.Entity<Ingredient>()
+            mb.Entity<EIngredient>()
                 .HasOne(i => i.Section)
                 .WithMany();
         }

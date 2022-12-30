@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
+using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
@@ -15,16 +15,16 @@ namespace MEalAPI.Controllers
     [ApiController]
     public class RecipesController : ControllerBase
     {
-        private readonly MEalDbContext _context;
+        private readonly MealDbContext _context;
 
-        public RecipesController(MEalDbContext context)
+        public RecipesController(MealDbContext context)
         {
             _context = context;
         }
 
         // GET: api/Recipes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
+        public async Task<ActionResult<IEnumerable<ERecipe>>> GetRecipes()
         {
             return await _context.Recipes
                 .Include(r => r.RecipeIngredients)
@@ -37,7 +37,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/Recipes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(long id)
+        public async Task<ActionResult<ERecipe>> GetRecipe(long id)
         {
             var recipe = await _context.Recipes
                 .Include(r => r.RecipeIngredients)
@@ -58,7 +58,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Recipes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipe(long id, Recipe recipe)
+        public async Task<IActionResult> PutRecipe(long id, ERecipe recipe)
         {
             if (id != recipe.Id)
             {
@@ -89,7 +89,7 @@ namespace MEalAPI.Controllers
         // POST: api/Recipes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
+        public async Task<ActionResult<ERecipe>> PostRecipe(ERecipe recipe)
         {
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();

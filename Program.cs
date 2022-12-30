@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
 using Microsoft.AspNetCore.Identity;
+using MEalAPI.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MEalDbContext>(options =>
+builder.Services.AddDbContext<MealDbContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
@@ -17,7 +17,16 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 
 // Add the user model class to use with Microsoft Identity
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MEalDbContext>();
+builder.Services.AddIdentity<EUser, IdentityRole>(opt =>
+{
+    // Defaults
+    opt.Password.RequireNonAlphanumeric = true;
+    opt.Password.RequireUppercase = true;
+    opt.User.RequireUniqueEmail = true;
+    
+    // Overrides
+    opt.Password.RequiredLength = 7; // Defaults to 6
+}).AddEntityFrameworkStores<MealDbContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

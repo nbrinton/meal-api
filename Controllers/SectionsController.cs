@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
+using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
@@ -15,23 +15,23 @@ namespace MEalAPI.Controllers
     [ApiController]
     public class SectionsController : ControllerBase
     {
-        private readonly MEalDbContext _context;
+        private readonly MealDbContext _context;
 
-        public SectionsController(MEalDbContext context)
+        public SectionsController(MealDbContext context)
         {
             _context = context;
         }
 
         // GET: api/Sections
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Section>>> GetSections()
+        public async Task<ActionResult<IEnumerable<ESection>>> GetSections()
         {
             return await _context.Sections.ToListAsync();
         }
 
         // GET: api/Sections/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Section>> GetSection(long id)
+        public async Task<ActionResult<ESection>> GetSection(long id)
         {
             var section = await _context.Sections.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Sections/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSection(long id, Section section)
+        public async Task<IActionResult> PutSection(long id, ESection section)
         {
             if (id != section.Id)
             {
@@ -77,7 +77,7 @@ namespace MEalAPI.Controllers
         // POST: api/Sections
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Section>> PostSection(Section section)
+        public async Task<ActionResult<ESection>> PostSection(ESection section)
         {
             _context.Sections.Add(section);
             await _context.SaveChangesAsync();

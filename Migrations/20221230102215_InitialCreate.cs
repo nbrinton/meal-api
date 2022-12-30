@@ -6,10 +6,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MEalAPI.Migrations
 {
-    public partial class IdentityTablesCreation : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "meal");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -50,6 +53,40 @@ namespace MEalAPI.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "meals",
+                schema: "meal",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_meals", x => x.id);
+                },
+                comment: "Table representing specific meals, primarily breakfast, lunch, and dinner.");
+
+            migrationBuilder.CreateTable(
+                name: "sections",
+                schema: "meal",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sections", x => x.id);
+                },
+                comment: "Table representing grocery store sections such as Dairy, Bulk, Produce, etc.");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -157,6 +194,115 @@ namespace MEalAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "recipes",
+                schema: "meal",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    prep_time = table.Column<int>(type: "integer", nullable: true),
+                    cook_time = table.Column<int>(type: "integer", nullable: true),
+                    MealId = table.Column<long>(type: "bigint", nullable: false),
+                    created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_recipes", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_recipes_meals_MealId",
+                        column: x => x.MealId,
+                        principalSchema: "meal",
+                        principalTable: "meals",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ingredients",
+                schema: "meal",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SectionId = table.Column<long>(type: "bigint", nullable: false),
+                    created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ingredients", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_ingredients_sections_SectionId",
+                        column: x => x.SectionId,
+                        principalSchema: "meal",
+                        principalTable: "sections",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "recipe_steps",
+                schema: "meal",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    order = table.Column<int>(type: "integer", nullable: false),
+                    content = table.Column<string>(type: "text", nullable: false),
+                    ERecipeId = table.Column<long>(type: "bigint", nullable: true),
+                    created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_recipe_steps", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_recipe_steps_recipes_ERecipeId",
+                        column: x => x.ERecipeId,
+                        principalSchema: "meal",
+                        principalTable: "recipes",
+                        principalColumn: "id");
+                },
+                comment: "Table representing steps within a recipe's directions.");
+
+            migrationBuilder.CreateTable(
+                name: "recipe_ingredients",
+                schema: "meal",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    units = table.Column<string>(type: "text", nullable: false),
+                    quantity = table.Column<double>(type: "double precision", nullable: false),
+                    is_staple = table.Column<bool>(type: "boolean", nullable: false),
+                    IngredientId = table.Column<long>(type: "bigint", nullable: false),
+                    ERecipeId = table.Column<long>(type: "bigint", nullable: true),
+                    created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_recipe_ingredients", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_recipe_ingredients_ingredients_IngredientId",
+                        column: x => x.IngredientId,
+                        principalSchema: "meal",
+                        principalTable: "ingredients",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_recipe_ingredients_recipes_ERecipeId",
+                        column: x => x.ERecipeId,
+                        principalSchema: "meal",
+                        principalTable: "recipes",
+                        principalColumn: "id");
+                },
+                comment: "Table tracking ingredients as used in a specific recipe, including the quantity, units of measurement, and if the ingredient is a 'staple' (should be excluded from generated grocery list");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -193,6 +339,36 @@ namespace MEalAPI.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ingredients_SectionId",
+                schema: "meal",
+                table: "ingredients",
+                column: "SectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_recipe_ingredients_ERecipeId",
+                schema: "meal",
+                table: "recipe_ingredients",
+                column: "ERecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_recipe_ingredients_IngredientId",
+                schema: "meal",
+                table: "recipe_ingredients",
+                column: "IngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_recipe_steps_ERecipeId",
+                schema: "meal",
+                table: "recipe_steps",
+                column: "ERecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_recipes_MealId",
+                schema: "meal",
+                table: "recipes",
+                column: "MealId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -213,10 +389,34 @@ namespace MEalAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "recipe_ingredients",
+                schema: "meal");
+
+            migrationBuilder.DropTable(
+                name: "recipe_steps",
+                schema: "meal");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ingredients",
+                schema: "meal");
+
+            migrationBuilder.DropTable(
+                name: "recipes",
+                schema: "meal");
+
+            migrationBuilder.DropTable(
+                name: "sections",
+                schema: "meal");
+
+            migrationBuilder.DropTable(
+                name: "meals",
+                schema: "meal");
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
+using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
@@ -15,23 +15,23 @@ namespace MEalAPI.Controllers
     [ApiController]
     public class RecipeStepsController : ControllerBase
     {
-        private readonly MEalDbContext _context;
+        private readonly MealDbContext _context;
 
-        public RecipeStepsController(MEalDbContext context)
+        public RecipeStepsController(MealDbContext context)
         {
             _context = context;
         }
 
         // GET: api/RecipeSteps
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RecipeStep>>> GetRecipeSteps()
+        public async Task<ActionResult<IEnumerable<ERecipeStep>>> GetRecipeSteps()
         {
             return await _context.RecipeSteps.ToListAsync();
         }
 
         // GET: api/RecipeSteps/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RecipeStep>> GetRecipeStep(long id)
+        public async Task<ActionResult<ERecipeStep>> GetRecipeStep(long id)
         {
             var recipeStep = await _context.RecipeSteps.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace MEalAPI.Controllers
         // PUT: api/RecipeSteps/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeStep(long id, RecipeStep recipeStep)
+        public async Task<IActionResult> PutRecipeStep(long id, ERecipeStep recipeStep)
         {
             if (id != recipeStep.Id)
             {
@@ -77,7 +77,7 @@ namespace MEalAPI.Controllers
         // POST: api/RecipeSteps
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RecipeStep>> PostRecipeStep(RecipeStep recipeStep)
+        public async Task<ActionResult<ERecipeStep>> PostRecipeStep(ERecipeStep recipeStep)
         {
             _context.RecipeSteps.Add(recipeStep);
             await _context.SaveChangesAsync();

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
+using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
@@ -15,16 +15,16 @@ namespace MEalAPI.Controllers
     [ApiController]
     public class IngredientsController : ControllerBase
     {
-        private readonly MEalDbContext _context;
+        private readonly MealDbContext _context;
 
-        public IngredientsController(MEalDbContext context)
+        public IngredientsController(MealDbContext context)
         {
             _context = context;
         }
 
         // GET: api/Ingredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
+        public async Task<ActionResult<IEnumerable<EIngredient>>> GetIngredients()
         {
             return await _context.Ingredients
                 .Include(i => i.Section)
@@ -33,7 +33,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/Ingredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Ingredient>> GetIngredient(long id)
+        public async Task<ActionResult<EIngredient>> GetIngredient(long id)
         {
             var ingredient = await _context.Ingredients
                 .Include(i => i.Section)
@@ -50,7 +50,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Ingredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngredient(long id, Ingredient ingredient)
+        public async Task<IActionResult> PutIngredient(long id, EIngredient ingredient)
         {
             if (id != ingredient.Id)
             {
@@ -81,7 +81,7 @@ namespace MEalAPI.Controllers
         // POST: api/Ingredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
+        public async Task<ActionResult<EIngredient>> PostIngredient(EIngredient ingredient)
         {
             _context.Ingredients.Add(ingredient);
             await _context.SaveChangesAsync();

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
+using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
@@ -15,16 +15,16 @@ namespace MEalAPI.Controllers
     [ApiController]
     public class RecipeIngredientsController : ControllerBase
     {
-        private readonly MEalDbContext _context;
+        private readonly MealDbContext _context;
 
-        public RecipeIngredientsController(MEalDbContext context)
+        public RecipeIngredientsController(MealDbContext context)
         {
             _context = context;
         }
 
         // GET: api/RecipeIngredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RecipeIngredient>>> GetRecipeIngredients()
+        public async Task<ActionResult<IEnumerable<ERecipeIngredient>>> GetRecipeIngredients()
         {
             return await _context.RecipeIngredients
                 .Include(r => r.Ingredient)
@@ -34,7 +34,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/RecipeIngredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RecipeIngredient>> GetRecipeIngredient(long id)
+        public async Task<ActionResult<ERecipeIngredient>> GetRecipeIngredient(long id)
         {
             var recipeIngredient = await _context.RecipeIngredients
                 .Include(ri => ri.Ingredient)
@@ -52,7 +52,7 @@ namespace MEalAPI.Controllers
         // PUT: api/RecipeIngredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeIngredient(long id, RecipeIngredient recipeIngredient)
+        public async Task<IActionResult> PutRecipeIngredient(long id, ERecipeIngredient recipeIngredient)
         {
             if (id != recipeIngredient.Id)
             {
@@ -83,7 +83,7 @@ namespace MEalAPI.Controllers
         // POST: api/RecipeIngredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RecipeIngredient>> PostRecipeIngredient(RecipeIngredient recipeIngredient)
+        public async Task<ActionResult<ERecipeIngredient>> PostRecipeIngredient(ERecipeIngredient recipeIngredient)
         {
             _context.RecipeIngredients.Add(recipeIngredient);
             await _context.SaveChangesAsync();

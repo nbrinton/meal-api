@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MEalAPI.Migrations
 {
-    [DbContext(typeof(MEalDbContext))]
-    partial class MEalDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MealDbContext))]
+    partial class MealDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,193 +22,222 @@ namespace MEalAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MEalAPI.Models.Ingredient", b =>
+            modelBuilder.Entity("MEalAPI.Entities.EIngredient", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<long>("SectionId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SectionId");
 
-                    b.ToTable("ingredients", "MEal");
+                    b.ToTable("ingredients", "meal");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.Meal", b =>
+            modelBuilder.Entity("MEalAPI.Entities.EMeal", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<DateTimeOffset>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id");
 
-                    b.ToTable("meals", "MEal");
+                    b.ToTable("meals", "meal");
 
                     b.HasComment("Table representing specific meals, primarily breakfast, lunch, and dinner.");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.Recipe", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipe", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<int?>("CookTime")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("cook_time");
 
                     b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
 
-                    b.Property<int>("MealId")
-                        .HasColumnType("integer");
+                    b.Property<long>("MealId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<int?>("PrepTime")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("prep_time");
 
                     b.Property<DateTimeOffset>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MealId");
 
-                    b.ToTable("recipes", "MEal");
+                    b.ToTable("recipes", "meal");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipeIngredient", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
+
+                    b.Property<long?>("ERecipeId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("IngredientId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsStaple")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_staple");
 
                     b.Property<double>("Quantity")
-                        .HasColumnType("double precision");
-
-                    b.Property<long?>("RecipeId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("double precision")
+                        .HasColumnName("quantity");
 
                     b.Property<string>("Units")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("units");
 
                     b.Property<DateTimeOffset>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ERecipeId");
+
                     b.HasIndex("IngredientId");
 
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("recipe_ingredients", "MEal");
+                    b.ToTable("recipe_ingredients", "meal");
 
                     b.HasComment("Table tracking ingredients as used in a specific recipe, including the quantity, units of measurement, and if the ingredient is a 'staple' (should be excluded from generated grocery list");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.RecipeStep", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipeStep", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("RecipeId")
+                    b.Property<long?>("ERecipeId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("integer")
+                        .HasColumnName("order");
+
                     b.Property<DateTimeOffset>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipeId");
+                    b.HasIndex("ERecipeId");
 
-                    b.ToTable("recipe_steps", "MEal");
+                    b.ToTable("recipe_steps", "meal");
 
                     b.HasComment("Table representing steps within a recipe's directions.");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.Section", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ESection", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<DateTimeOffset>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
                     b.HasKey("Id");
 
-                    b.ToTable("sections", "MEal");
+                    b.ToTable("sections", "meal");
 
                     b.HasComment("Table representing grocery store sections such as Dairy, Bulk, Produce, etc.");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.User", b =>
+            modelBuilder.Entity("MEalAPI.Entities.EUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -410,9 +439,9 @@ namespace MEalAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.Ingredient", b =>
+            modelBuilder.Entity("MEalAPI.Entities.EIngredient", b =>
                 {
-                    b.HasOne("MEalAPI.Models.Section", "Section")
+                    b.HasOne("MEalAPI.Entities.ESection", "Section")
                         .WithMany()
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,9 +450,9 @@ namespace MEalAPI.Migrations
                     b.Navigation("Section");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.Recipe", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipe", b =>
                 {
-                    b.HasOne("MEalAPI.Models.Meal", "Meal")
+                    b.HasOne("MEalAPI.Entities.EMeal", "Meal")
                         .WithMany()
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -432,26 +461,26 @@ namespace MEalAPI.Migrations
                     b.Navigation("Meal");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipeIngredient", b =>
                 {
-                    b.HasOne("MEalAPI.Models.Ingredient", "Ingredient")
+                    b.HasOne("MEalAPI.Entities.ERecipe", null)
+                        .WithMany("RecipeIngredients")
+                        .HasForeignKey("ERecipeId");
+
+                    b.HasOne("MEalAPI.Entities.EIngredient", "Ingredient")
                         .WithMany()
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MEalAPI.Models.Recipe", null)
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeId");
-
                     b.Navigation("Ingredient");
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.RecipeStep", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipeStep", b =>
                 {
-                    b.HasOne("MEalAPI.Models.Recipe", null)
+                    b.HasOne("MEalAPI.Entities.ERecipe", null)
                         .WithMany("RecipeSteps")
-                        .HasForeignKey("RecipeId");
+                        .HasForeignKey("ERecipeId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -465,7 +494,7 @@ namespace MEalAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("MEalAPI.Models.User", null)
+                    b.HasOne("MEalAPI.Entities.EUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -474,7 +503,7 @@ namespace MEalAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MEalAPI.Models.User", null)
+                    b.HasOne("MEalAPI.Entities.EUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -489,7 +518,7 @@ namespace MEalAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MEalAPI.Models.User", null)
+                    b.HasOne("MEalAPI.Entities.EUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -498,14 +527,14 @@ namespace MEalAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("MEalAPI.Models.User", null)
+                    b.HasOne("MEalAPI.Entities.EUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MEalAPI.Models.Recipe", b =>
+            modelBuilder.Entity("MEalAPI.Entities.ERecipe", b =>
                 {
                     b.Navigation("RecipeIngredients");
 

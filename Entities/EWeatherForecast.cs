@@ -1,6 +1,6 @@
-namespace MEalAPI.Models
+namespace MEalAPI.Entities
 {
-    public class WeatherForecast
+    public class EWeatherForecast
     {
         public DateTime Date { get; set; }
 

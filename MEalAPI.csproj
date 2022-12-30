@@ -24,11 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Remove="C:\Users\natha\repos\MEalAPI\.editorconfig" />
+    <EditorConfigFiles Remove="C:\Users\natha\repos\meal-api\.editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="C:\Users\natha\repos\MEalAPI\.editorconfig" />
+    <None Include="C:\Users\natha\repos\meal-api\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
