@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
 using MEalAPI.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MEalAPI.Controllers
 {

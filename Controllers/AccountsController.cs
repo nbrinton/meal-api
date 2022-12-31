@@ -5,10 +5,6 @@ using MEalAPI.Entities;
 using MEalAPI.Dto.Requests;
 using MEalAPI.Dto.Responses;
 
-// Un-comment if not using the SignInManager
-//using System.Security.Claims;
-//using Microsoft.AspNetCore.Authentication;
-
 namespace MEalAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -63,23 +59,6 @@ namespace MEalAPI.Controllers
             {
                 return Unauthorized("Invalid username or password");
             }
-
-            // You can use this instead of the SignInManager if you want more control
-            //var user = await _userManager.FindByEmailAsync(userLoginRequest.Email);
-
-            //if (user != null && await _userManager.CheckPasswordAsync(user, userLoginRequest.Password))
-            //{
-            //    var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
-            //    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-            //    identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
-
-            //    await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity));
-            //    return Ok();
-            //}
-            //else
-            //{
-            //    return Unauthorized("Invalid username or password");
-            //}
         }
 
         [HttpPost("logout")]
