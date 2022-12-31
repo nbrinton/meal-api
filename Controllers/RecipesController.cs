@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
 using MEalAPI.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MEalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RecipesController : ControllerBase
     {
         private readonly MealDbContext _context;
