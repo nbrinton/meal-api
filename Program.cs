@@ -17,7 +17,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 
 // Add the user model class to use with Microsoft Identity
-builder.Services.AddIdentity<EUser, IdentityRole>(opt =>
+builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
     // Defaults
     opt.Password.RequireNonAlphanumeric = true;

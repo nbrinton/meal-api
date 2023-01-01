@@ -26,7 +26,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/Ingredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EIngredient>>> GetIngredients()
+        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
         {
             return await _context.Ingredients
                 .Include(i => i.Section)
@@ -35,7 +35,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/Ingredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EIngredient>> GetIngredient(long id)
+        public async Task<ActionResult<Ingredient>> GetIngredient(long id)
         {
             var ingredient = await _context.Ingredients
                 .Include(i => i.Section)
@@ -52,7 +52,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Ingredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngredient(long id, EIngredient ingredient)
+        public async Task<IActionResult> PutIngredient(long id, Ingredient ingredient)
         {
             if (id != ingredient.Id)
             {
@@ -83,7 +83,7 @@ namespace MEalAPI.Controllers
         // POST: api/Ingredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EIngredient>> PostIngredient(EIngredient ingredient)
+        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
         {
             _context.Ingredients.Add(ingredient);
             await _context.SaveChangesAsync();

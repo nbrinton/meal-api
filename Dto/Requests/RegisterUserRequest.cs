@@ -2,7 +2,7 @@
 
 namespace MEalAPI.Dto.Requests
 {
-    public class DRegisterUserRequest
+    public class RegisterUserRequest
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

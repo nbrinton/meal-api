@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MEalAPI.Entities
 {
-    [Comment("Table representing grocery store sections such as Dairy, Bulk, Produce, etc.")]
     [Table("sections", Schema = "meal")]
-    public class ESection : EBaseEntity, ISection
+    [Comment("Table representing grocery store sections such as Dairy, Bulk, Produce, etc.")]
+    public class Section : BaseEntity, ISection
     {
         
     }

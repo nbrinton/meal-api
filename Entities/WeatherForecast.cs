@@ -1,6 +1,6 @@
 namespace MEalAPI.Entities
 {
-    public class EWeatherForecast
+    public class WeatherForecast
     {
         public DateTime Date { get; set; }
 

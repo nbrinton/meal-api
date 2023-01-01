@@ -26,14 +26,14 @@ namespace MEalAPI.Controllers
 
         // GET: api/Meals
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EMeal>>> GetMeal()
+        public async Task<ActionResult<IEnumerable<Meal>>> GetMeal()
         {
             return await _context.Meals.ToListAsync();
         }
 
         // GET: api/Meals/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EMeal>> GetMeal(int id)
+        public async Task<ActionResult<Meal>> GetMeal(int id)
         {
             var meal = await _context.Meals.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Meals/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(int id, EMeal meal)
+        public async Task<IActionResult> PutMeal(int id, Meal meal)
         {
             if (id != meal.Id)
             {
@@ -79,7 +79,7 @@ namespace MEalAPI.Controllers
         // POST: api/Meals
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EMeal>> PostMeal(EMeal meal)
+        public async Task<ActionResult<Meal>> PostMeal(Meal meal)
         {
             _context.Meals.Add(meal);
             await _context.SaveChangesAsync();

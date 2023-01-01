@@ -11,11 +11,11 @@ namespace MEalAPI.Controllers
     [ApiController]
     public class AccountsController : Controller
     {
-        private readonly UserManager<EUser> _userManager;
-        private readonly SignInManager<EUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
 
-        public AccountsController(IMapper mapper, UserManager<EUser> userManager, SignInManager<EUser> signInManager)
+        public AccountsController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _mapper = mapper;
             _userManager = userManager;
@@ -23,27 +23,27 @@ namespace MEalAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] DRegisterUserRequest userForRegistration)
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequest userForRegistration)
         {
             if (userForRegistration == null || !ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var user = _mapper.Map<EUser>(userForRegistration);
+            var user = _mapper.Map<User>(userForRegistration);
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
 
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
-                return BadRequest(new DRegisterUserResponse() { Errors = errors });
+                return BadRequest(new RegisterUserResponse() { Errors = errors });
             }
 
             return StatusCode(201);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] DUserLoginRequest userLoginRequest)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest userLoginRequest)
         {
             if (userLoginRequest == null || !ModelState.IsValid)
             {

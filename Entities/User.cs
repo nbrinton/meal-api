@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MEalAPI.Entities
 {
-    public class EUser : IdentityUser, IUser
+    public class User : IdentityUser, IUser
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

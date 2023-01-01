@@ -4,6 +4,6 @@ namespace MEalAPI.Interfaces
 {
     public interface IIngredient
     {
-        public ESection Section { get; set; }
+        public Section Section { get; set; }
     }
 }

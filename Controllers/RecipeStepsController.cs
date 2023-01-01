@@ -26,14 +26,14 @@ namespace MEalAPI.Controllers
 
         // GET: api/RecipeSteps
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ERecipeStep>>> GetRecipeSteps()
+        public async Task<ActionResult<IEnumerable<RecipeStep>>> GetRecipeSteps()
         {
             return await _context.RecipeSteps.ToListAsync();
         }
 
         // GET: api/RecipeSteps/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ERecipeStep>> GetRecipeStep(long id)
+        public async Task<ActionResult<RecipeStep>> GetRecipeStep(long id)
         {
             var recipeStep = await _context.RecipeSteps.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace MEalAPI.Controllers
         // PUT: api/RecipeSteps/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeStep(long id, ERecipeStep recipeStep)
+        public async Task<IActionResult> PutRecipeStep(long id, RecipeStep recipeStep)
         {
             if (id != recipeStep.Id)
             {
@@ -79,7 +79,7 @@ namespace MEalAPI.Controllers
         // POST: api/RecipeSteps
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ERecipeStep>> PostRecipeStep(ERecipeStep recipeStep)
+        public async Task<ActionResult<RecipeStep>> PostRecipeStep(RecipeStep recipeStep)
         {
             _context.RecipeSteps.Add(recipeStep);
             await _context.SaveChangesAsync();

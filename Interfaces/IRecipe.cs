@@ -8,10 +8,10 @@ namespace MEalAPI.Interfaces
 
         public int? CookTime { get; set; }
 
-        public EMeal Meal { get; set; }
+        public Meal Meal { get; set; }
 
-        public List<ERecipeIngredient>? RecipeIngredients { get; set; }
+        public List<RecipeIngredient>? RecipeIngredients { get; set; }
 
-        public List<ERecipeStep>? RecipeSteps { get; set; }
+        public List<RecipeStep>? RecipeSteps { get; set; }
     }
 }

@@ -5,20 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MEalAPI.Entities
 {
-    [Comment("Table representing steps within a recipe's directions.")]
     [Table("recipe_steps", Schema = "meal")]
-    public class ERecipeStep : ECreatedUpdatedEntity, IRecipeStep
+    [Comment("Table representing steps within a recipe's directions.")]
+    public class RecipeStep : CreatedUpdatedEntity, IRecipeStep
     {
         [Key]
-        [Column("id")]
         public long Id { get; set; }
 
         [Required]
-        [Column("order")]
         public int Order { get; set; }
 
         [Required]
-        [Column("content")]
         public string Content { get; set; } = null!;
     }
 }

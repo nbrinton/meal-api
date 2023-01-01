@@ -17,41 +17,41 @@ namespace MEalAPI.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
+                    id = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                    table.PrimaryKey("pk_asp_net_roles", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: true),
-                    LastName = table.Column<string>(type: "text", nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<string>(type: "text", nullable: false),
+                    first_name = table.Column<string>(type: "text", nullable: true),
+                    last_name = table.Column<string>(type: "text", nullable: true),
+                    user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: true),
+                    security_stamp = table.Column<string>(type: "text", nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true),
+                    phone_number = table.Column<string>(type: "text", nullable: true),
+                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    lockout_end = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    access_failed_count = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("pk_asp_net_users", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,7 +67,7 @@ namespace MEalAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_meals", x => x.id);
+                    table.PrimaryKey("pk_meals", x => x.id);
                 },
                 comment: "Table representing specific meals, primarily breakfast, lunch, and dinner.");
 
@@ -84,7 +84,7 @@ namespace MEalAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_sections", x => x.id);
+                    table.PrimaryKey("pk_sections", x => x.id);
                 },
                 comment: "Table representing grocery store sections such as Dairy, Bulk, Produce, etc.");
 
@@ -92,20 +92,20 @@ namespace MEalAPI.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId = table.Column<string>(type: "text", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                    role_id = table.Column<string>(type: "text", nullable: false),
+                    claim_type = table.Column<string>(type: "text", nullable: true),
+                    claim_value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("pk_asp_net_role_claims", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "fk_asp_net_role_claims_asp_net_roles_role_id",
+                        column: x => x.role_id,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -113,20 +113,20 @@ namespace MEalAPI.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    claim_type = table.Column<string>(type: "text", nullable: true),
+                    claim_value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.PrimaryKey("pk_asp_net_user_claims", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_asp_net_user_claims_asp_net_users_user_id",
+                        column: x => x.user_id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -134,19 +134,19 @@ namespace MEalAPI.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "text", nullable: false),
-                    ProviderKey = table.Column<string>(type: "text", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    login_provider = table.Column<string>(type: "text", nullable: false),
+                    provider_key = table.Column<string>(type: "text", nullable: false),
+                    provider_display_name = table.Column<string>(type: "text", nullable: true),
+                    user_id = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("pk_asp_net_user_logins", x => new { x.login_provider, x.provider_key });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_asp_net_user_logins_asp_net_users_user_id",
+                        column: x => x.user_id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -154,23 +154,23 @@ namespace MEalAPI.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: false)
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    role_id = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("pk_asp_net_user_roles", x => new { x.user_id, x.role_id });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "fk_asp_net_user_roles_asp_net_roles_role_id",
+                        column: x => x.role_id,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_asp_net_user_roles_asp_net_users_user_id",
+                        column: x => x.user_id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -178,19 +178,19 @@ namespace MEalAPI.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    LoginProvider = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Value = table.Column<string>(type: "text", nullable: true)
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    login_provider = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("pk_asp_net_user_tokens", x => new { x.user_id, x.login_provider, x.name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_asp_net_user_tokens_asp_net_users_user_id",
+                        column: x => x.user_id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -203,17 +203,17 @@ namespace MEalAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     prep_time = table.Column<int>(type: "integer", nullable: true),
                     cook_time = table.Column<int>(type: "integer", nullable: true),
-                    MealId = table.Column<long>(type: "bigint", nullable: false),
+                    meal_id = table.Column<long>(type: "bigint", nullable: false),
                     created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipes", x => x.id);
+                    table.PrimaryKey("pk_recipes", x => x.id);
                     table.ForeignKey(
-                        name: "FK_recipes_meals_MealId",
-                        column: x => x.MealId,
+                        name: "fk_recipes_meals_meal_id",
+                        column: x => x.meal_id,
                         principalSchema: "meal",
                         principalTable: "meals",
                         principalColumn: "id",
@@ -227,17 +227,17 @@ namespace MEalAPI.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SectionId = table.Column<long>(type: "bigint", nullable: false),
+                    section_id = table.Column<long>(type: "bigint", nullable: false),
                     created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ingredients", x => x.id);
+                    table.PrimaryKey("pk_ingredients", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ingredients_sections_SectionId",
-                        column: x => x.SectionId,
+                        name: "fk_ingredients_sections_section_id",
+                        column: x => x.section_id,
                         principalSchema: "meal",
                         principalTable: "sections",
                         principalColumn: "id",
@@ -253,16 +253,16 @@ namespace MEalAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     order = table.Column<int>(type: "integer", nullable: false),
                     content = table.Column<string>(type: "text", nullable: false),
-                    ERecipeId = table.Column<long>(type: "bigint", nullable: true),
+                    recipe_id = table.Column<long>(type: "bigint", nullable: true),
                     created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipe_steps", x => x.id);
+                    table.PrimaryKey("pk_recipe_steps", x => x.id);
                     table.ForeignKey(
-                        name: "FK_recipe_steps_recipes_ERecipeId",
-                        column: x => x.ERecipeId,
+                        name: "fk_recipe_steps_recipes_recipe_id",
+                        column: x => x.recipe_id,
                         principalSchema: "meal",
                         principalTable: "recipes",
                         principalColumn: "id");
@@ -279,24 +279,24 @@ namespace MEalAPI.Migrations
                     units = table.Column<string>(type: "text", nullable: false),
                     quantity = table.Column<double>(type: "double precision", nullable: false),
                     is_staple = table.Column<bool>(type: "boolean", nullable: false),
-                    IngredientId = table.Column<long>(type: "bigint", nullable: false),
-                    ERecipeId = table.Column<long>(type: "bigint", nullable: true),
+                    ingredient_id = table.Column<long>(type: "bigint", nullable: false),
+                    recipe_id = table.Column<long>(type: "bigint", nullable: true),
                     created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipe_ingredients", x => x.id);
+                    table.PrimaryKey("pk_recipe_ingredients", x => x.id);
                     table.ForeignKey(
-                        name: "FK_recipe_ingredients_ingredients_IngredientId",
-                        column: x => x.IngredientId,
+                        name: "fk_recipe_ingredients_ingredients_ingredient_id",
+                        column: x => x.ingredient_id,
                         principalSchema: "meal",
                         principalTable: "ingredients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_recipe_ingredients_recipes_ERecipeId",
-                        column: x => x.ERecipeId,
+                        name: "fk_recipe_ingredients_recipes_recipe_id",
+                        column: x => x.recipe_id,
                         principalSchema: "meal",
                         principalTable: "recipes",
                         principalColumn: "id");
@@ -304,71 +304,71 @@ namespace MEalAPI.Migrations
                 comment: "Table tracking ingredients as used in a specific recipe, including the quantity, units of measurement, and if the ingredient is a 'staple' (should be excluded from generated grocery list");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
+                name: "ix_asp_net_role_claims_role_id",
                 table: "AspNetRoleClaims",
-                column: "RoleId");
+                column: "role_id");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
-                column: "NormalizedName",
+                column: "normalized_name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
+                name: "ix_asp_net_user_claims_user_id",
                 table: "AspNetUserClaims",
-                column: "UserId");
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
+                name: "ix_asp_net_user_logins_user_id",
                 table: "AspNetUserLogins",
-                column: "UserId");
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
+                name: "ix_asp_net_user_roles_role_id",
                 table: "AspNetUserRoles",
-                column: "RoleId");
+                column: "role_id");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
-                column: "NormalizedEmail");
+                column: "normalized_email");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
-                column: "NormalizedUserName",
+                column: "normalized_user_name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ingredients_SectionId",
+                name: "ix_ingredients_section_id",
                 schema: "meal",
                 table: "ingredients",
-                column: "SectionId");
+                column: "section_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipe_ingredients_ERecipeId",
+                name: "ix_recipe_ingredients_ingredient_id",
                 schema: "meal",
                 table: "recipe_ingredients",
-                column: "ERecipeId");
+                column: "ingredient_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipe_ingredients_IngredientId",
+                name: "ix_recipe_ingredients_recipe_id",
                 schema: "meal",
                 table: "recipe_ingredients",
-                column: "IngredientId");
+                column: "recipe_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipe_steps_ERecipeId",
+                name: "ix_recipe_steps_recipe_id",
                 schema: "meal",
                 table: "recipe_steps",
-                column: "ERecipeId");
+                column: "recipe_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipes_MealId",
+                name: "ix_recipes_meal_id",
                 schema: "meal",
                 table: "recipes",
-                column: "MealId");
+                column: "meal_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

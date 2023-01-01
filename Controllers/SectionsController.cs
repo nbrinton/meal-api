@@ -26,14 +26,14 @@ namespace MEalAPI.Controllers
 
         // GET: api/Sections
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ESection>>> GetSections()
+        public async Task<ActionResult<IEnumerable<Section>>> GetSections()
         {
             return await _context.Sections.ToListAsync();
         }
 
         // GET: api/Sections/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ESection>> GetSection(long id)
+        public async Task<ActionResult<Section>> GetSection(long id)
         {
             var section = await _context.Sections.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace MEalAPI.Controllers
         // PUT: api/Sections/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSection(long id, ESection section)
+        public async Task<IActionResult> PutSection(long id, Section section)
         {
             if (id != section.Id)
             {
@@ -79,7 +79,7 @@ namespace MEalAPI.Controllers
         // POST: api/Sections
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ESection>> PostSection(ESection section)
+        public async Task<ActionResult<Section>> PostSection(Section section)
         {
             _context.Sections.Add(section);
             await _context.SaveChangesAsync();

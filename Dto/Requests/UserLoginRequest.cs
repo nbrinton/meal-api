@@ -2,7 +2,7 @@
 
 namespace MEalAPI.Dto.Requests
 {
-    public class DUserLoginRequest
+    public class UserLoginRequest
     {
         [Required]
         [EmailAddress]

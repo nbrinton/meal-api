@@ -1,14 +1,16 @@
 ﻿using MEalAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MEalAPI.Entities
 {
     [Table("ingredients", Schema = "meal")]
-    public class EIngredient : EBaseEntity, IIngredient
+    [Comment("Table representing stand-alone ingredients.")]
+    public class Ingredient : BaseEntity, IIngredient
     {
         // Foreign Key Relations
         [Required]
-        public ESection Section { get; set; } = null!;
+        public Section Section { get; set; } = null!;
     }
 }

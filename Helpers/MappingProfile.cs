@@ -8,7 +8,7 @@ namespace MEalAPI.Helpers
     {
         public MappingProfile()
         {
-            CreateMap<DRegisterUserRequest, EUser>().ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
+            CreateMap<RegisterUserRequest, User>().ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
         }
     }
 }

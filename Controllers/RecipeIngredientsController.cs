@@ -26,7 +26,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/RecipeIngredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ERecipeIngredient>>> GetRecipeIngredients()
+        public async Task<ActionResult<IEnumerable<RecipeIngredient>>> GetRecipeIngredients()
         {
             return await _context.RecipeIngredients
                 .Include(r => r.Ingredient)
@@ -36,7 +36,7 @@ namespace MEalAPI.Controllers
 
         // GET: api/RecipeIngredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ERecipeIngredient>> GetRecipeIngredient(long id)
+        public async Task<ActionResult<RecipeIngredient>> GetRecipeIngredient(long id)
         {
             var recipeIngredient = await _context.RecipeIngredients
                 .Include(ri => ri.Ingredient)
@@ -54,7 +54,7 @@ namespace MEalAPI.Controllers
         // PUT: api/RecipeIngredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeIngredient(long id, ERecipeIngredient recipeIngredient)
+        public async Task<IActionResult> PutRecipeIngredient(long id, RecipeIngredient recipeIngredient)
         {
             if (id != recipeIngredient.Id)
             {
@@ -85,7 +85,7 @@ namespace MEalAPI.Controllers
         // POST: api/RecipeIngredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ERecipeIngredient>> PostRecipeIngredient(ERecipeIngredient recipeIngredient)
+        public async Task<ActionResult<RecipeIngredient>> PostRecipeIngredient(RecipeIngredient recipeIngredient)
         {
             _context.RecipeIngredients.Add(recipeIngredient);
             await _context.SaveChangesAsync();
