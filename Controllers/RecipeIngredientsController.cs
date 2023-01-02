@@ -5,19 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MEalAPI.DbContexts;
-using MEalAPI.Models;
+using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RecipeIngredientsController : ControllerBase
     {
-        private readonly MEalDbContext _context;
+        private readonly MealDbContext _context;
 
-        public RecipeIngredientsController(MEalDbContext context)
+        public RecipeIngredientsController(MealDbContext context)
         {
             _context = context;
         }
@@ -88,7 +90,7 @@ namespace MEalAPI.Controllers
             _context.RecipeIngredients.Add(recipeIngredient);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRecipeIngredient", new { id = recipeIngredient.Id }, recipeIngredient);
+            return CreatedAtAction(nameof(GetRecipeIngredient), new { id = recipeIngredient.Id }, recipeIngredient);
         }
 
         // DELETE: api/RecipeIngredients/5

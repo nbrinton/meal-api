@@ -1,17 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MEalAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MEalAPI.Models
+namespace MEalAPI.Entities
 {
-    [Table("recipes", Schema = "MEal")]
-    public class Recipe : BaseEntity
+    [Table("recipes", Schema = "meal")]
+    [Comment("Table containing user recipes.")]
+    public class Recipe : BaseEntity, IRecipe
     {
-        [Key]
-        public long Id { get; set; }
-
-        [Required]
-        public string Name { get; set; } = null!;
-
         public int? PrepTime { get; set; }
 
         public int? CookTime { get; set; }

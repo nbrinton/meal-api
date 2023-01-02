@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MEalAPI.Models
+namespace MEalAPI.Entities
 {
+    [Table("recipe_ingredients", Schema = "meal")]
     [Comment("Table tracking ingredients as used in a specific recipe, including the quantity, units of measurement, and if the ingredient is a 'staple' (should be excluded from generated grocery list")]
-    [Table("recipe_ingredients", Schema = "MEal")]
-    public class RecipeIngredient : BaseEntity
+    public class RecipeIngredient : CreatedUpdatedEntity
     {
         [Key]
         public long Id { get; set; }
@@ -18,6 +18,7 @@ namespace MEalAPI.Models
         public double Quantity { get; set; }
 
         public bool IsStaple { get; set; }
+
 
         // Foreign Key Relations
         [Required]

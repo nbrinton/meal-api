@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MEalAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MEalAPI.Models
+namespace MEalAPI.Entities
 {
+    [Table("recipe_steps", Schema = "meal")]
     [Comment("Table representing steps within a recipe's directions.")]
-    [Table("recipe_steps", Schema = "MEal")]
-    public class RecipeStep : BaseEntity
+    public class RecipeStep : CreatedUpdatedEntity, IRecipeStep
     {
         [Key]
         public long Id { get; set; }

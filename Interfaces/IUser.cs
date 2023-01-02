@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace MEalAPI.Models
+﻿namespace MEalAPI.Interfaces
 {
-    public class User : IdentityUser
+    public interface IUser
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

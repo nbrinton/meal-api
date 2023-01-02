@@ -1,13 +1,14 @@
-﻿using MEalAPI.Models;
+﻿using MEalAPI.Entities;
+using MEalAPI.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MEalAPI.DbContexts
 {
-    public class MEalDbContext : IdentityDbContext<User>
+    public class MealDbContext : IdentityDbContext<User>
     {
-        public MEalDbContext(DbContextOptions<MEalDbContext> options)
+        public MealDbContext(DbContextOptions<MealDbContext> options)
             : base(options)
         {
         }
@@ -55,12 +56,18 @@ namespace MEalAPI.DbContexts
             return base.SaveChanges();
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder ob)
+        {
+            ob.UseSnakeCaseNamingConvention();
+        }
+
         protected override void OnModelCreating(ModelBuilder mb)
         {
             base.OnModelCreating(mb);
 
             // Documentation reference:
             // https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#single-navigation-property-1
+
             mb.Entity<Recipe>()
                 .HasMany(r => r.RecipeIngredients)
                 .WithOne();
@@ -79,7 +86,7 @@ namespace MEalAPI.DbContexts
 
             mb.Entity<Ingredient>()
                 .HasOne(i => i.Section)
-                .WithMany();            
+                .WithMany();
         }
 
     }

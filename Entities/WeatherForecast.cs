@@ -1,4 +1,4 @@
-namespace MEalAPI.Models
+namespace MEalAPI.Entities
 {
     public class WeatherForecast
     {
