@@ -10,16 +10,27 @@ MEal meal-planning web application.
 3. (Optional) Create a new Solution and add both the the MEalAPI csproj and the MEalClient
    esproj to it.
 4. Install the project dependencies using either dotnet via powershell or the
-   Visual Studio package wizard or CLI.
+   Visual Studio package wizard or CLI. The project packages are listed in `MEalAPI.csproj`.
 	* Follow the steps at [Install EF Core](https://docs.microsoft.com/en-us/ef/core/get-started/overview/install)
 	  to install the ef core tools.
 5. Install PostgreSQL v14.
 6. Apply the latest database migration by running `dotnet ef database update`.
 7. Using Jetbrain's DataGrip (or whichever database IDE or the built-in Visual
    Studio SQL tools) create a new connection using the connection details in
-   `Program.cs`.
+   `appsettings.json`. NOTE: This needs to be changed to use [Secret Manager](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows).
 8. Copy `SeedData/meal_seed_data.sql` into a new console session using the new
   connection and run to add the seed data to the database.
+
+## Database
+### Start from scratch
+1. Close all connections and delete the database by running `dropdb.exe --host localhost --username postgres --port 5432 --echo meal`.
+2. Delete the migration entries under the `Migrations` directory.
+3. Run:
+```powershell
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+References: https://stackoverflow.com/a/16082497
 
 ## Tutorials
 ### [User Registration with Angular and ASP.NET Core Identity | CodeMaze](https://code-maze.com/user-registration-angular-aspnet-identity/)

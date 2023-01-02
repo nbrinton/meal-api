@@ -7,21 +7,22 @@ using MEalAPI.Dto.Responses;
 
 namespace MEalAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
-    public class AccountsController : Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
 
-        public AccountsController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
+        // api/account/register
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequest userForRegistration)
         {
@@ -42,6 +43,7 @@ namespace MEalAPI.Controllers
             return StatusCode(201);
         }
 
+        // api/account/login
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest userLoginRequest)
         {
@@ -61,6 +63,7 @@ namespace MEalAPI.Controllers
             }
         }
 
+        // api/account/logout
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {

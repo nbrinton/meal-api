@@ -12,7 +12,7 @@ using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/recipe-steps")]
     [ApiController]
     [Authorize]
     public class RecipeStepsController : ControllerBase
@@ -24,14 +24,14 @@ namespace MEalAPI.Controllers
             _context = context;
         }
 
-        // GET: api/RecipeSteps
+        // GET: api/recipe-steps
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecipeStep>>> GetRecipeSteps()
         {
             return await _context.RecipeSteps.ToListAsync();
         }
 
-        // GET: api/RecipeSteps/5
+        // GET: api/recipe-steps/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RecipeStep>> GetRecipeStep(long id)
         {
@@ -45,7 +45,7 @@ namespace MEalAPI.Controllers
             return recipeStep;
         }
 
-        // PUT: api/RecipeSteps/5
+        // PUT: api/recipe-steps/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRecipeStep(long id, RecipeStep recipeStep)
@@ -76,7 +76,7 @@ namespace MEalAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/RecipeSteps
+        // POST: api/recipe-steps
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<RecipeStep>> PostRecipeStep(RecipeStep recipeStep)
@@ -87,7 +87,7 @@ namespace MEalAPI.Controllers
             return CreatedAtAction(nameof(GetRecipeStep), new { id = recipeStep.Id }, recipeStep);
         }
 
-        // DELETE: api/RecipeSteps/5
+        // DELETE: api/recipe-steps/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRecipeStep(long id)
         {

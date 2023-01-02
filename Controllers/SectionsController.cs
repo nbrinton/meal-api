@@ -12,7 +12,7 @@ using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sections")]
     [ApiController]
     [Authorize]
     public class SectionsController : ControllerBase
@@ -24,14 +24,14 @@ namespace MEalAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Sections
+        // GET: api/sections
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Section>>> GetSections()
         {
             return await _context.Sections.ToListAsync();
         }
 
-        // GET: api/Sections/5
+        // GET: api/sections/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Section>> GetSection(long id)
         {
@@ -45,7 +45,7 @@ namespace MEalAPI.Controllers
             return section;
         }
 
-        // PUT: api/Sections/5
+        // PUT: api/sections/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSection(long id, Section section)
@@ -76,7 +76,7 @@ namespace MEalAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Sections
+        // POST: api/sections
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Section>> PostSection(Section section)
@@ -87,7 +87,7 @@ namespace MEalAPI.Controllers
             return CreatedAtAction(nameof(GetSection), new { id = section.Id }, section);
         }
 
-        // DELETE: api/Sections/5
+        // DELETE: api/sections/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSection(long id)
         {

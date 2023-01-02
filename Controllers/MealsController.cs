@@ -12,7 +12,7 @@ using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/meals")]
     [ApiController]
     [Authorize]
     public class MealsController : ControllerBase
@@ -24,14 +24,14 @@ namespace MEalAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Meals
+        // GET: api/meals
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Meal>>> GetMeal()
         {
             return await _context.Meals.ToListAsync();
         }
 
-        // GET: api/Meals/5
+        // GET: api/meals/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Meal>> GetMeal(int id)
         {
@@ -45,7 +45,7 @@ namespace MEalAPI.Controllers
             return meal;
         }
 
-        // PUT: api/Meals/5
+        // PUT: api/meals/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMeal(int id, Meal meal)
@@ -76,7 +76,7 @@ namespace MEalAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Meals
+        // POST: api/meals
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Meal>> PostMeal(Meal meal)
@@ -87,7 +87,7 @@ namespace MEalAPI.Controllers
             return CreatedAtAction(nameof(GetMeal), new { id = meal.Id }, meal);
         }
 
-        // DELETE: api/Meals/5
+        // DELETE: api/meals/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMeal(int id)
         {

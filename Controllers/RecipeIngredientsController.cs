@@ -12,7 +12,7 @@ using MEalAPI.Entities;
 
 namespace MEalAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/recipe-ingredients")]
     [ApiController]
     [Authorize]
     public class RecipeIngredientsController : ControllerBase
@@ -24,7 +24,7 @@ namespace MEalAPI.Controllers
             _context = context;
         }
 
-        // GET: api/RecipeIngredients
+        // GET: api/recipe-ingredients
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecipeIngredient>>> GetRecipeIngredients()
         {
@@ -34,7 +34,7 @@ namespace MEalAPI.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/RecipeIngredients/5
+        // GET: api/recipe-igredients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RecipeIngredient>> GetRecipeIngredient(long id)
         {
@@ -51,7 +51,7 @@ namespace MEalAPI.Controllers
             return recipeIngredient;
         }
 
-        // PUT: api/RecipeIngredients/5
+        // PUT: api/recipe-ingredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRecipeIngredient(long id, RecipeIngredient recipeIngredient)
@@ -82,7 +82,7 @@ namespace MEalAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/RecipeIngredients
+        // POST: api/recipe-ingredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<RecipeIngredient>> PostRecipeIngredient(RecipeIngredient recipeIngredient)
@@ -93,7 +93,7 @@ namespace MEalAPI.Controllers
             return CreatedAtAction(nameof(GetRecipeIngredient), new { id = recipeIngredient.Id }, recipeIngredient);
         }
 
-        // DELETE: api/RecipeIngredients/5
+        // DELETE: api/recipe-ingredients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRecipeIngredient(long id)
         {
